@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+
+{% block body %}
+    {{ form_start(registrationForm) }}
+
+    {# Affichage des erreurs globales du formulaire #}
+    {{ form_errors(registrationForm) }}
+
+    {# Champ Nom #}
+    <div>
+        {{ form_label(registrationForm.nom, 'Nom') }}
+        {{ form_widget(registrationForm.nom) }}
+        {{ form_errors(registrationForm.nom) }}
+    </div>
+
+    {# Champ Prénom #}
+    <div>
+        {{ form_label(registrationForm.prenom, 'Prénom') }}
+        {{ form_widget(registrationForm.prenom) }}
+        {{ form_errors(registrationForm.prenom) }}
+    </div>
+
+    {# Champ Email #}
+    <div>
+        {{ form_label(registrationForm.email, 'Email') }}
+        {{ form_widget(registrationForm.email) }}
+        {{ form_errors(registrationForm.email) }}
+    </div>
+
+    {# Champ Mot de passe #}
+    <div>
+        {{ form_label(registrationForm.plainPassword.first, 'Mot de passe') }}
+        {{ form_widget(registrationForm.plainPassword.first) }}
+        {{ form_errors(registrationForm.plainPassword.first) }}
+    </div>
+
+    {# Champ Confirmation du mot de passe #}
+    <div>
+        {{ form_label(registrationForm.plainPassword.second, 'Confirmation du mot de passe') }}
+        {{ form_widget(registrationForm.plainPassword.second) }}
+        {{ form_errors(registrationForm.plainPassword.second) }}
+    </div>
+
+    {# Champ d'acceptation des termes #}
+    <div>
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'J\'accepte les conditions générales'
+        }) }}
+        {{ form_errors(registrationForm.agreeTerms) }}
+    </div>
+
+    <button type="submit" class="btn">Register</button>
+
+    {{ form_end(registrationForm) }}
+{% endblock %}
+</body>
+</html>

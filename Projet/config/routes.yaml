@@ -5,3 +5,33 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+app_accueil:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_profile:
+    path: /profile
+    controller: App\Controller\ProfileController::index
+    methods: GET
+
+app_profile_edit:
+    path: /profile/edit
+    controller: App\Controller\ProfileController::edit
+    methods: GET|POST
+
+app_change_password:
+    path: /profile/change-password
+    controller: App\Controller\ProfileController::changePassword
+    methods: GET|POST
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    defaults:
+        authenticator: App\Security\AppCustomAuthenticator
+        check_path: app_login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
