@@ -1,0 +1,15 @@
+{% extends '/evenement/base.html.twig' %}
+
+{% block body %}
+    <h1>Créer un nouvel événement</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.dateTime) }}
+    {{ form_row(form.maxParticipants) }}
+    {{ form_row(form.isPublic) }}
+
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(form) }}
+{% endblock %}

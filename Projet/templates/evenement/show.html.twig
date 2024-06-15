@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ evenement.title }}</h1>
+    <p>{{ evenement.description }}</p>
+    <p>Date : {{ evenement.dateTime|date('Y-m-d H:i') }}</p>
+    <p>Nombre de participants maximum : {{ evenement.maxParticipants }}</p>
+    <p>Public : {{ evenement.isPublic ? 'Oui' : 'Non' }}</p>
+{% endblock %}
