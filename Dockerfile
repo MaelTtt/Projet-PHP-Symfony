@@ -15,22 +15,30 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Update composer
+RUN composer self-update
+
+# Copy composer.lock and composer.json
+COPY Projet/composer.lock Projet/composer.json /var/www/
+
 # Install Symfony CLI
 RUN wget https://get.symfony.com/cli/installer -O - | bash && \
     mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
-# Initialize composer.json and install dependencies
-RUN composer init --no-interaction --require=symfony/framework-bundle:^5.3 && \
-    composer install --no-interaction --optimize-autoloader --no-dev
-
-# Install Twig
-RUN composer require twig/twig
+# Install all PHP dependencies
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-plugins --no-scripts
 
 # Copy existing application directory contents
-COPY . /var/www/
+WORKDIR /var/www
+
+# Copy existing application directory contents
+COPY . /var/www
 
 # Make port 80 available to the world outside this container
 EXPOSE 8000
+
+# Change current user to www
+RUN chown -R www-data:www-data /var/www
 
 # Define environment variable
 ENV SYMFONY_ENV dev

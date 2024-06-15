@@ -50,9 +50,3 @@ cd Projet
 symfony server:start
 ```
 
-Si une dépendance doit être ajoutée, mettez là dans le Dockerfile, exemple :
-
-```bash
-RUN composer require twig/twig
-```
-
