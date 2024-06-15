@@ -33,12 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'Le champ Mot de passe ne peut pas être vide')]
-    #[Assert\Length(min: 8, minMessage: 'Le mot de passe doit comporter au moins {{ limit }} caractères')]
     private ?string $password = null;
 
     // Cette propriété n'est pas mappée en base de données, elle est utilisée temporairement pour la confirmation du mot de passe
-    #[Assert\NotBlank(message: 'Veuillez confirmer votre mot de passe')]
     private ?string $plainPassword = null;
 
     #[ORM\Column(type: 'json')]
