@@ -13,21 +13,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile', name: 'app_profile')]
+    #[Route('/profile', name: 'profile')]
     public function index(): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté
-        return $this->render('profil/profil.html.twig', [
+        return $this->render('profile/profile.html.twig', [
             'user' => $user,
         ]);
     }
 
-    #[Route('/profile/edit', name: 'app_profile_edit')]
+    #[Route('/profile/edit', name: 'profile_edit')]
     public function edit(Request $request): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté
 
-        // Crée le formulaire de modification du profil
+        // Crée le formulaire de modification du profile
         $form = $this->createForm(UserProfileFormType::class, $user);
         $form->handleRequest($request);
 
@@ -36,7 +36,7 @@ class ProfileController extends AbstractController
 
             $this->addFlash('success', 'Your profile has been updated successfully.');
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->render('profile/edit.html.twig', [
@@ -44,7 +44,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/change-password', name: 'app_change_password')]
+    #[Route('/profile/change-password', name: 'change_password')]
     public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté

@@ -1,63 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-<h1>Register</h1>
+{% extends 'base.html.twig' %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {{ form_start(registrationForm) }}
+<div class="flex justify-center items-center h-screen">
+    <div class="card w-full max-w-md bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h1 class="text-2xl font-bold mb-6 text-center">Inscription</h1>
 
-    {# Affichage des erreurs globales du formulaire #}
-    {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm, {'attr': {'class': 'space-y-4'}}) }}
 
-    {# Champ Nom #}
-    <div>
-        {{ form_label(registrationForm.nom, 'Nom') }}
-        {{ form_widget(registrationForm.nom) }}
-        {{ form_errors(registrationForm.nom) }}
+            {# Affichage des erreurs globales du formulaire #}
+            {{ form_errors(registrationForm) }}
+
+            {# Champs Nom et Prénom sur la même ligne #}
+            <div class="flex space-x-4">
+                <div class="form-control w-1/2">
+                    {{ form_label(registrationForm.nom, 'Nom', {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.nom) }}
+                </div>
+                <div class="form-control w-1/2">
+                    {{ form_label(registrationForm.prenom, 'Prénom', {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.prenom) }}
+                </div>
+            </div>
+
+            {# Champ Email #}
+            <div class="form-control w-full">
+                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'label'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            {# Champ Mot de passe #}
+            <div class="form-control w-full">
+                {{ form_label(registrationForm.plainPassword.first, 'Mot de passe', {'label_attr': {'class': 'label'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
+
+            {# Champ Confirmation du mot de passe #}
+            <div class="form-control w-full">
+                {{ form_label(registrationForm.plainPassword.second, 'Confirmation du mot de passe', {'label_attr': {'class': 'label'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                {{ form_errors(registrationForm.plainPassword.second) }}
+            </div>
+
+            {# Champ d'acceptation des termes #}
+            <div class="form-control w-full">
+                <label class="label cursor-pointer justify-start space-x-2">
+                    {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox checkbox-primary'}}) }}
+                    <span class="label-text">J'accepte les conditions générales</span>
+                </label>
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full">S'inscrire</button>
+
+            {{ form_end(registrationForm) }}
+        </div>
     </div>
-
-    {# Champ Prénom #}
-    <div>
-        {{ form_label(registrationForm.prenom, 'Prénom') }}
-        {{ form_widget(registrationForm.prenom) }}
-        {{ form_errors(registrationForm.prenom) }}
-    </div>
-
-    {# Champ Email #}
-    <div>
-        {{ form_label(registrationForm.email, 'Email') }}
-        {{ form_widget(registrationForm.email) }}
-        {{ form_errors(registrationForm.email) }}
-    </div>
-
-    {# Champ Mot de passe #}
-    <div>
-        {{ form_label(registrationForm.plainPassword.first, 'Mot de passe') }}
-        {{ form_widget(registrationForm.plainPassword.first) }}
-        {{ form_errors(registrationForm.plainPassword.first) }}
-    </div>
-
-    {# Champ Confirmation du mot de passe #}
-    <div>
-        {{ form_label(registrationForm.plainPassword.second, 'Confirmation du mot de passe') }}
-        {{ form_widget(registrationForm.plainPassword.second) }}
-        {{ form_errors(registrationForm.plainPassword.second) }}
-    </div>
-
-    {# Champ d'acceptation des termes #}
-    <div>
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'J\'accepte les conditions générales'
-        }) }}
-        {{ form_errors(registrationForm.agreeTerms) }}
-    </div>
-
-    <button type="submit" class="btn">Register</button>
-
-    {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
-</body>
-</html>

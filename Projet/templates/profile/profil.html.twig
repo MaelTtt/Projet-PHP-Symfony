@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto pt-24">
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h1 class="text-2xl font-bold mb-4">Mon Profil</h1>
+
+                {% if user is defined and user %}
+                    <div class="space-y-2">
+                        <p class="text-lg"><span class="font-semibold">Email :</span> {{ user.email }}</p>
+                        <p class="text-lg"><span class="font-semibold">Prénom :</span> {{ user.firstName }}</p>
+                        <p class="text-lg"><span class="font-semibold">Nom :</span> {{ user.lastName }}</p>
+                    </div>
+
+                    <div class="card-actions justify-end mt-6">
+                        <a href="{{ path('app_profile_edit') }}" class="btn btn-primary">Modifier le profil</a>
+                        <a href="{{ path('app_change_password') }}" class="btn btn-secondary">Changer le mot de passe</a>
+                    </div>
+                {% else %}
+                    <p>Vous n'êtes pas connecté.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

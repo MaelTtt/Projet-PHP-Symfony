@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le profil{% endblock %}
+
+{% block body %}
+    <div class="flex justify-center items-center h-screen">
+        <div class="card w-full max-w-md bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h1 class="text-2xl font-bold mb-6">Modifier le profil</h1>
+
+                {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+
+                <div class="form-control w-full">
+                    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="form-control w-full">
+                    {{ form_label(form.firstName, 'Prénom', {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.firstName, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(form.firstName) }}
+                </div>
+
+                <div class="form-control w-full">
+                    {{ form_label(form.lastName, 'Nom', {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.lastName, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(form.lastName) }}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">Enregistrer les modifications</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -16,7 +16,7 @@
     {% endblock %}
 </head>
 <body>
-<div class="mx-8 my-4 absolute w-11/12 z-50">
+<div class="mx-8 my-4 w-11/12 fixed z-50">
     <div class="navbar bg-base-100 rounded-box">
         <div class="navbar-start">
             <div class="dropdown">
@@ -29,12 +29,11 @@
                 </div>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Item 1</a></li>
                     <li>
                         <a>Événements</a>
                         <ul class="p-2">
-                            <li><a>Liste des Événements</a></li>
-                            <li><a>Créer un Événement</a></li>
+                            <li><a href="{{  path('evenement_list') }}">Liste des Événements</a></li>
+                            <li><a href="{{  path('evenement_new') }}">Créer un Événement</a></li>
                         </ul>
                     </li>
                     <li><a>Item 3</a></li>
@@ -44,13 +43,12 @@
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a href="{{ path('event_list') }}">Liste des Événements</a></li>
                 <li>
                     <details>
                         <summary>Événements</summary>
                         <ul class="p-2 rounded-t-none">
-                            <li><a>Liste des Événements</a></li>
-                            <li><a>Créer un Événement</a></li>
+                            <li><a href="{{  path('evenement_list') }}">Liste des Événements</a></li>
+                            <li><a href="{{  path('evenement_new') }}">Créer un Événement</a></li>
                         </ul>
                     </details>
                 </li>
@@ -58,9 +56,8 @@
             </ul>
         </div>
         <div class="navbar-end">
-            <a class="btn">CONNEXION</a>
+            {% if app.user %}
             <ul class="menu menu-horizontal px-1">
-
                 <li>
                     <details>
                         <summary>
@@ -70,23 +67,19 @@
                             MAEL TURHCHETTO
                         </summary>
                         <ul class="p-2 rounded-t-none">
-                            <li><a>Modifier le Profil</a></li>
+                            <li><a href="{{ path('profile') }}">Modifier le Profil</a></li>
                             <li><a>Inscriptions</a></li>
                         </ul>
                     </details>
                 </li>
             </ul>
+            {% else %}
+                <a href="{{ path('login') }}" class="btn">CONNEXION</a>
+            {% endif %}
         </div>
     </div>
 </div>
-{#
-{% if app.user %}
-        <a href="{{ path('registrations') }}">Inscriptions</a>
-        <a href="{{ path('user_profile') }}">Profil</a>
-    {% else %}
-        <a href="{{ path('login') }}">Connexion</a>
-{% endif %}
-#}
+
 
 {% block body %}{% endblock %}
 </body>

@@ -1,15 +1,49 @@
-{% extends '/evenement/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Créer un nouvel événement</h1>
+    <div class="container mx-auto pt-24 flex justify-center">
+        <div class="w-full max-w-md">
+            <h1 class="text-3xl font-bold mb-8 text-center">Créer un nouvel événement</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.dateTime) }}
-    {{ form_row(form.maxParticipants) }}
-    {{ form_row(form.isPublic) }}
+            <form method="post" action="{{ path('evenement_list') }}">
+                {{ form_start(form) }}
 
-    <button type="submit" class="btn btn-primary">Créer</button>
-    {{ form_end(form) }}
+                <div class="form-control w-full">
+                    {{ form_label(form.title, "Titre", {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                <div class="form-control w-full my-4">
+                    {{ form_label(form.description, null, {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'textarea textarea-bordered h-24'}}) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <div class="form-control w-full">
+                    {{ form_label(form.dateTime, "Date", {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.dateTime, {'attr': {'class': 'w-full'}}) }}
+                    {{ form_errors(form.dateTime) }}
+                </div>
+
+                <div class="form-control w-full my-4">
+                    {{ form_label(form.maxParticipants, "Participants maximum", {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(form.maxParticipants, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(form.maxParticipants) }}
+                </div>
+
+                <div class="form-control w-full my-4">
+                    <label class="label cursor-pointer flex justify-start space-x-2">
+                        {{ form_widget(form.isPublic, {'attr': {'class': 'checkbox checkbox-primary'}}) }}
+
+                        {{ form_label(form.isPublic, 'Publique', {'label_attr': {'class': 'label-text ml-2'}}) }}
+                    </label>
+                    {{ form_errors(form.isPublic) }}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">Créer</button>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
 {% endblock %}
