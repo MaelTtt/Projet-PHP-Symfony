@@ -6,7 +6,7 @@ WORKDIR /var/www
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y libpng-dev libjpeg62-turbo-dev libfreetype6-dev locales zip unzip git libonig-dev wget && \
+    apt-get install -y libpng-dev libjpeg62-turbo-dev libfreetype6-dev locales zip unzip git libonig-dev wget nodejs && \
     docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Clear cache
