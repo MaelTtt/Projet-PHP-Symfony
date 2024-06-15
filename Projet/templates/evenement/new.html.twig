@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Créer un nouvel événement</title>
-    {% block stylesheets %}
-        {# Ici, vous pouvez inclure vos fichiers CSS #}
-    {% endblock %}
-</head>
-<body>
-<h1>Créer un nouvel événement</h1>
+{% extends '/evenement/base.html.twig' %}
 
-{{ form_start(form) }}
-{{ form_row(form.title) }}
-{{ form_row(form.description) }}
-{{ form_row(form.dateTime) }}
-{{ form_row(form.maxParticipants) }}
-{{ form_row(form.isPublic) }}
+{% block body %}
+    <h1>Créer un nouvel événement</h1>
 
-<button type="submit" class="btn btn-primary">Créer</button>
-{{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.dateTime) }}
+    {{ form_row(form.maxParticipants) }}
+    {{ form_row(form.isPublic) }}
 
-{% block javascripts %}
-    {# Ici, vous pouvez inclure vos fichiers JavaScript #}
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(form) }}
 {% endblock %}
-</body>
-</html>

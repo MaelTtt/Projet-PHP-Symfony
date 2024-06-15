@@ -1,0 +1,26 @@
+{% extends '/evenement/base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <ul>
+        {% for evenement in pagination %}
+                <li>
+                    <a href="{{ path('evenement_show', {'id': evenement.id}) }}">{{ evenement.title }}</a>
+                    {% if evenement.isPublic %}
+                        <span>(Public)</span>
+                    {% else %}
+                        <span>(Privé)</span>
+                    {% endif %}
+                </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
