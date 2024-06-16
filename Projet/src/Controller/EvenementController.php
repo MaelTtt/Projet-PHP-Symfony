@@ -38,6 +38,10 @@ class EvenementController extends AbstractController
     {
         $queryBuilder = $evenementRepository->createQueryBuilder('e');
 
+        //if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+        //    $queryBuilder->andWhere('e.isPublic = true');
+        //}
+
         $pagination = $paginator->paginate(
             $queryBuilder->getQuery(),
             $request->query->getInt('page', 1),
@@ -50,12 +54,20 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/evenement/{id}', name: 'evenement_show')]
-    public function show(Evenement $evenement): Response
+    public function show(int $id, EvenementRepository $evenementRepository): Response
     {
-        $this->denyAccessUnlessGranted('view', $evenement);
+        $evenement = $evenementRepository->find($id);
+
+        if (!$evenement) {
+            throw $this->createNotFoundException('The event does not exist');
+        }
+
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY') && !$evenement->isIsPublic()) {
+            throw $this->createAccessDeniedException();
+        }
 
         return $this->render('evenement/show.html.twig', [
-            'event' => $evenement,
+            'evenement' => $evenement,
         ]);
     }
 }

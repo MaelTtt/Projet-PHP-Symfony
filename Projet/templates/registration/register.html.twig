@@ -58,11 +58,6 @@
 
                 <button type="submit" class="btn btn-primary w-full">S'inscrire</button>
 
-                {% if not registrationForm.vars.valid %}
-                    <div class="alert alert-danger">
-                        {{ form_errors(registrationForm) }}
-                    </div>
-                {% endif %}
 
                 {{ form_end(registrationForm) }}
             </div>
