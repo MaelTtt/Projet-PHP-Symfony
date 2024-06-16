@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mx-auto pt-24 container max-w-4xl">
+        <h1 class="text-4xl font-semibold mb-8 text-center">Modifier l'événement</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

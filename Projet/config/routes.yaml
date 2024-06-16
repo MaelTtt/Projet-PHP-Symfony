@@ -41,3 +41,8 @@ app_login:
 app_logout:
     path: /logout
     controller: App\Controller\SecurityController::logout
+
+evenement_delete:
+    path: '/evenement/{id}/delete'
+    controller: 'App\Controller\EvenementController::delete'
+    methods: [ 'DELETE' ]

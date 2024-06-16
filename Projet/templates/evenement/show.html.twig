@@ -26,8 +26,19 @@
                         </svg>
                         <span class="font-semibold">Public :</span> {{ evenement.isPublic ? 'Oui' : 'Non' }}
                     </div>
+                    <div class="mt-4 flex justify-between">
+                        <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-warning">Modifier</a>
+                        <form method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+
+

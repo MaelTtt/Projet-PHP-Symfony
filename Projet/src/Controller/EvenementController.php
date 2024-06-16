@@ -70,4 +70,44 @@ class EvenementController extends AbstractController
             'evenement' => $evenement,
         ]);
     }
+
+    #[Route('/evenement/{id}/edit', name: 'evenement_edit')]
+    public function edit(int $id, Request $request, EvenementRepository $evenementRepository, EntityManagerInterface $entityManager): Response
+    {
+        $evenement = $evenementRepository->find($id);
+
+        if (!$evenement) {
+            throw $this->createNotFoundException('The event does not exist');
+        }
+
+        $form = $this->createForm(EvenementType::class, $evenement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('evenement_show', ['id' => $evenement->getId()]);
+        }
+
+        return $this->render('evenement/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/evenement/{id}/delete', name: 'evenement_delete', methods: ['DELETE'])]
+    public function delete(int $id, Request $request, EvenementRepository $evenementRepository, EntityManagerInterface $entityManager): Response
+    {
+        $evenement = $evenementRepository->find($id);
+
+        if (!$evenement) {
+            throw $this->createNotFoundException('The event does not exist');
+        }
+
+        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($evenement);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('evenement_list');
+    }
+
 }
