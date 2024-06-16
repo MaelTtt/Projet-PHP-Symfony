@@ -15,8 +15,8 @@ class UserProfileFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class);
+            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
